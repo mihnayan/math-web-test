@@ -1,16 +1,5 @@
 'use strict'
 
-function calc(num1, num2) {
-    return new Promise((resolve, reject) => {
-        let calcResult = new Number(num1/num2);
-        if ($.isNumeric(calcResult)) {
-            resolve(calcResult);
-        } else {
-            reject('Не возможно преобразовать результат в число!');
-        }
-    })
-}
-
 function showCalcResult(statusText, resultText) {
     $('p#status-text').html(statusText);
     $('p#result-text').html(resultText);
@@ -20,22 +9,26 @@ function showCalcResult(statusText, resultText) {
 function doOperation() {
     let num1 = $('#num-1').val();
     let num2 = $('#num-2').val();
-    calc(num1, num2)
-        .then(result => {
-            let message = [
+    let url = ['div?num1=', num1, '&num2=', num2].join('');
+    $.ajax({
+    	url,
+    	method: 'post',
+    	dataType: 'json'
+    }).done(data => {
+    	let message;
+    	if (data.status === 'ok') {
+    		message = [
                 'Результат деления ',
-                num1, ' на ', num2,
-                ' равен: ', result
-            ].join('');
-            showCalcResult(
-                ['Результат деления ', num1, ' на ', num2, ' равен: '].join(''),
-                result
-            );
-        })
-        .catch(e => {
-            showCalcResult(
-                ['Ошибка обработки сервера при делении ', 
-                    num1, ' на ', num2, ':'
-                ].join(''), e);
-      });
+                data.num1, ' на ', data.num2, ' равен: '
+            ].join('');	
+    	} else {
+    		message = [
+    			'Ошибка обработки сервера при делении ', 
+                num1, ' на ', num2, ':'
+            ].join('')
+    	}
+        showCalcResult(message, data.result);
+    }).fail((xhr, textStatus) => {
+    	console.error(textStatus);
+    });
 }
