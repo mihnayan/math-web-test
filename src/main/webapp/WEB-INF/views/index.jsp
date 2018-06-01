@@ -44,6 +44,11 @@
         </address>
         <p id="copyright">&copy; 2018 <a href="https://github.com/mihnayan" target="blank">Михаил Мангушев</a></p>
     </footer>
+    
+    <div id="loader" class="modal">
+        <img id="loading-image" src="static/img/loader.gif" alt="loading..">
+        <p>Идёт вычисление...</p>
+    </div>
 
     <div id="calc-result-dialog" class="modal">
         <p id="status-text"></p>

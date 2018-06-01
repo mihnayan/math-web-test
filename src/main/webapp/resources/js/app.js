@@ -6,6 +6,18 @@ function showCalcResult(statusText, resultText) {
     $('#calc-result-dialog').modal();
 }
 
+function showLoader() {
+	$('#loader').modal({
+		escapeClose: false,
+	    clickClose: false,
+	    showClose: false
+	});
+}
+
+function hideLoader() {
+	$('#loader').modal().hide();
+}
+
 function doOperation() {
     let num1 = $('#num-1').val();
     let num2 = $('#num-2').val();
@@ -13,8 +25,12 @@ function doOperation() {
     $.ajax({
     	url,
     	method: 'post',
-    	dataType: 'json'
+    	dataType: 'json',
+    	beforeSend: function (xhr) {
+    		showLoader();
+    	}
     }).done(data => {
+    	hideLoader();
     	let message;
     	if (data.status === 'ok') {
     		message = [

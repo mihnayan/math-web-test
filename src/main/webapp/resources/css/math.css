@@ -92,3 +92,11 @@ footer, article {
     float: right;
     width: 450px;
 }
+
+#loader {
+	text-align: center;	
+}
+
+#loading-image {
+	width: 100%;
+}
