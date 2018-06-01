@@ -1,4 +1,4 @@
-package mihnayan.mathweb.controller;
+package mihnayan.mathweb;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -21,10 +21,26 @@ public class MathController {
 	@ResponseBody
 	public String divideNumbers(@RequestParam(value="num1", required=false) String num1,
 			@RequestParam(value="num2", required=false) String num2) {
-		if (num1 == null || num2 == null) {
-			return buildResponse("error", "Одно из чисел не задано!");
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
 		}
-		return "Params: " + num1 + " " + num2;
+		
+		double number1, number2;
+		try {
+			number1 = Double.parseDouble(num1);
+			number2 = Double.parseDouble(num2);
+		} catch(NullPointerException e) {
+			return buildResponse("error", "Одно из чисел не задано!");
+		} catch(NumberFormatException e) {
+			return buildResponse("error", "Не возможно преобразовать в число одно из значений!");
+		}
+		
+		Double result = number1/number2;
+		
+		return buildResponse("ok", result.toString());
 	}
 	
 	private String buildResponse(String status, String result) {
