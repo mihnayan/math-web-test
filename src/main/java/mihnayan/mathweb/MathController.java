@@ -1,9 +1,9 @@
 package mihnayan.mathweb;
 
 import javax.json.Json;
-import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
+import org.apache.log4j.Logger;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MathController {
+	
+	private static final Logger logger = Logger.getLogger(MathController.class);
 
 	@GetMapping("/")
 	public String startPage() {
@@ -30,14 +32,22 @@ public class MathController {
 			e1.printStackTrace();
 		}
 		
+		logger.info("Attempt to divide numbers: " + num1 + ", " + num2);
+		
 		double number1, number2;
 		JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
 		try {
 			number1 = Double.parseDouble(num1);
 			number2 = Double.parseDouble(num2);
+			if (number2 == 0.0) {
+				logger.error("Divide by zero!");
+				return buildErrorResponse(jsonBuilder, "Попытка деления на ноль!");
+			}
 		} catch(NullPointerException e) {
+			logger.warn("One of the numbers are not specified!");
 			return buildErrorResponse(jsonBuilder, "Одно из чисел не задано!");
 		} catch(NumberFormatException e) {
+			logger.error("Cannot convert one of the values to a number!");
 			return buildErrorResponse(jsonBuilder, "Не возможно преобразовать в число одно из значений!");
 		}
 		
