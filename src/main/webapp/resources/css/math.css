@@ -5,7 +5,7 @@ body {
     text-align: left;
     line-height: 1.429;
     clear: both;
-    width: 800px;
+    max-width: 800px;
 }
 
 h2 {
@@ -44,10 +44,11 @@ footer, article {
 
 #header {
     padding: 2.5em 0 0 0;
+    text-align: center;
 }
 
 #header h1 {
-    font-size: 3.571em;
+    font-size: 2.38em;
     line-height: 0.6;
 }
 
@@ -64,8 +65,29 @@ footer, article {
     text-shadow: none;
 }
 
+section header {
+    text-align: center;
+}
+
+
+
+form label {
+    display: block;
+}
+
+form .input {
+    margin-bottom: .7em;
+    margin-left: .5em;
+}
+
+form .button {
+    clear: both;
+    margin-left: .5em;
+}
+
 #footer {
     padding-bottom: 2em;
+    margin-top: 2em;
     text-align: right;
 }
 
@@ -76,27 +98,69 @@ footer, article {
     overflow: hidden;
     padding: 20px;
     text-align: left;
-    width: 760px;
     border-radius: 10px;
 }
 
 #company-name {
-    float: left;
     width: 300px;
     display: block;
     font-size: 1.286em;
     color: #c64350;
 }
 
-#company-info {
-    float: right;
-    width: 450px;
+footer #copyright {
+    text-align: right;
 }
 
 #loader {
-	text-align: center;	
+    text-align: center;
 }
 
 #loading-image {
-	width: 100%;
+    width: 100%;
+}
+
+@media (min-width: 500px) {
+    #header h1 {
+        font-size: 3.571em;
+    }
+
+    form label {
+        display: inline-block;
+    }
+
+    footer #copyright {
+        text-align: center;
+    }
+}
+
+@media (min-width: 800px) {
+    section header {
+        text-align: left;
+        padding-left: 1em;
+    }
+
+    #company-address {
+        width: 760px;
+    }
+
+    #company-name {
+        float: left;
+        width: 300px;
+        display: block;
+    }
+
+    #company-info {
+        float: right;
+        width: 450px;
+    }
+
+    form .input {
+        display: inline;
+        float: left;
+    }
+
+    footer #copyright {
+        text-align: right;
+    }
 }

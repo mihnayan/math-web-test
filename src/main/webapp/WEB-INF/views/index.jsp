@@ -18,19 +18,21 @@
         <header id="sect-division__header">
             <h2>Деление чисел</h2>
         </header>
-            <div>
-                    <form method="POST" action="#">
-                        <label>
-                            Первое число
-                            <input type="text" id="num-1" placeholder="0.0" required>
-                        </label>
-                        <label>
-                            Второе число
-                            <input type="text" id="num-2" placeholder="0.0" required>
-                        </label>
-                        <button type="button" onclick="doOperation()">Получить результат</button>
-                    </form>
+        <div>
+            <form method="POST" action="#" id="divide-form">
+                <div class="input">
+                    <label for="num-1">Первое число</label>
+                    <input type="text" id="num-1" placeholder="0.0" required data-msg="Заполните это поле">
                 </div>
+                <div class="input">
+                    <label for="num-2">Второе число</label>
+                    <input type="text" id="num-2" placeholder="0.0" required data-msg="Заполните это поле">
+                </div>
+                <div class="button">
+                    <button type="button" onclick="doOperation()">Получить результат</button>
+                </div>
+            </form>
+        </div>
     </section>
     <footer id="footer">
         <address id="company-address">
@@ -58,6 +60,7 @@
 
     <script type="text/javascript" src="static/vendor/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="static/vendor/jquery.modal.min.js"></script>
+    <script type="text/javascript" src="static/vendor/jquery.validate.min.js"></script>
     <script type="text/javascript" src="static/js/app.js"></script>
 </body>
 </html>

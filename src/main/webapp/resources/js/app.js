@@ -1,5 +1,7 @@
 'use strict'
 
+let validator;
+
 function showCalcResult(statusText, resultText) {
     $('p#status-text').html(statusText);
     $('p#result-text').html(resultText);
@@ -19,6 +21,7 @@ function hideLoader() {
 }
 
 function doOperation() {
+	if (!validator.element('#num-1') || !validator.element('#num-2')) return;
     let num1 = $('#num-1').val();
     let num2 = $('#num-2').val();
     let url = ['div?num1=', num1, '&num2=', num2].join('');
@@ -48,3 +51,7 @@ function doOperation() {
     	console.error(textStatus);
     });
 }
+
+$(function () {
+    validator = $('#divide-form').validate();
+})
